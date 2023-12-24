@@ -149,6 +149,11 @@ h6 {
 
 .checked {
   text-decoration: line-through;
+  color: #1161F5;
+}
+
+.check-input{
+  cursor: pointer;
 }
 
 p {
@@ -166,8 +171,8 @@ span {
   height: 25px;
   font-size: 18px;
   margin: 20px;
-  color: #1161F5;
-  border: 1px #1161F5 solid;
+  color: rgb(175, 9, 9);
+  border: 2px rgb(175, 9, 9) solid;
   border-radius: 50px;
   text-align: center;
   cursor: pointer;

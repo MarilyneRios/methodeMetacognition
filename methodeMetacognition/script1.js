@@ -1,33 +1,10 @@
+const checkInput = document.querySelectorAll('.check-input')
 /* compter les messages */
 function count () {
   const messagesCount = document.querySelectorAll('.row').length;
   document.querySelector('#count').textContent = messagesCount;
 }
-
-/* Sélectionnez toutes les cases à cocher*/
-function addCheckboxListeners() {
-  document.addEventListener('change', function(event) {
-    if (event.target.matches('.check-input')) {
-      const grandParent = event.target.parentNode.parentNode;
-      const paragraph = grandParent.querySelector('p'); 
-
-      if (paragraph) {
-        if (event.target.checked) {
-          paragraph.classList.add('checked'); 
-        } else {
-          paragraph.classList.remove('checked');
-        }
-      } else {
-        console.log('Paragraph not found');
-      }
-    }
-  });
-}
-
-
-addCheckboxListeners();
-
-/* afficher la date */
+ /* afficher la date */
 let year = new Date().getUTCFullYear();
 let month;
 let day;
@@ -46,8 +23,9 @@ if (new Date().getDate() < 9) {
 
 const date = day + "/" + month + "/" + year;
 document.querySelector('#footer').innerHTML += `<span id="date">${date}</span>`;
-
+//
 /* SUPPRIMER DES MESSAGES */
+
 const pictoDelete = document.querySelectorAll('.delete');
 
 pictoDelete.forEach(elementX => elementX.addEventListener ('click', event => {
@@ -55,11 +33,10 @@ pictoDelete.forEach(elementX => elementX.addEventListener ('click', event => {
   event.currentTarget.parentElement.remove();
   count();
   console.log(count)
-  addCheckboxListeners();
 }));
 
-
 /* AJOUTER UN NOUVEAU MESSAGE AVEC UN INPUT */
+
 const addClick = document.querySelector('#btn-add');
 const messageInput = document.querySelector('#add-step');
 
@@ -70,51 +47,24 @@ addClick.addEventListener ('click', event => {
       <img class="avatar" src="images/macon.png" />
       <div class="text-container">
         <h6>Maçon</h6>
-        <p><input type="checkbox" class="check-input crossed-out"> ${messageInput.value}</p>
+        <p>${checkInput} ${messageInput.value}</p>
       </div>
       <span class="delete">✖</span>
     </div>
   `;
   document.querySelector('#msg-container').innerHTML += newMessage;
-  
+  // Attacher l'écouteur d'événements à tous les boutons de suppression
   const allDeleteButtons = document.querySelectorAll('.delete');
   allDeleteButtons.forEach(button => {
     button.addEventListener('click', event => {
       console.log('clic détecté sur supprimer');
       event.currentTarget.parentElement.remove();
       count();
-      addCheckboxListeners();
-      console.log("check pris en compte?",addCheckboxListeners())
     });
   });
   count();
+  //vider le champ de saisi
   messageInput.value = "";
-  addCheckboxListeners();
-  console.log("check pris en compte?",addCheckboxListeners())
 });
 
 
-
-/* Sélectionner les étapes: Toutes, A faire et Faites */
-const buttons = document.querySelectorAll('.btn-outline-primary');
-const elements = document.querySelectorAll('.element');
-
-buttons.forEach(button => {
-  button.addEventListener('click', function() {
-    const filter = this.dataset.filter;
-    console.log("Filter value:", filter); 
-
-    buttons.forEach(btn => {
-      btn.classList.remove('active');
-    });
-    this.classList.add('active');
-
-    elements.forEach(element => {
-      if (filter === 'all' || element.dataset.filter === filter) {
-        element.style.display = 'block';
-      } else {
-        element.style.display = 'none';
-      }
-    });
-  });
-});
