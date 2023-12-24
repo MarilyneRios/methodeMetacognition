@@ -1,29 +1,28 @@
 /* compter les messages */
-function count () {
-  const messagesCount = document.querySelectorAll('.row').length;
-  document.querySelector('#count').textContent = messagesCount;
+function count() {
+  const messagesCount = document.querySelectorAll(".row").length;
+  document.querySelector("#count").textContent = messagesCount;
 }
 
 /* Sélectionnez toutes les cases à cocher*/
 function addCheckboxListeners() {
-  document.addEventListener('change', function(event) {
-    if (event.target.matches('.check-input')) {
+  document.addEventListener("change", function (event) {
+    if (event.target.matches(".check-input")) {
       const grandParent = event.target.parentNode.parentNode;
-      const paragraph = grandParent.querySelector('p'); 
+      const paragraph = grandParent.querySelector("p");
 
       if (paragraph) {
         if (event.target.checked) {
-          paragraph.classList.add('checked'); 
+          paragraph.classList.add("checked");
         } else {
-          paragraph.classList.remove('checked');
+          paragraph.classList.remove("checked");
         }
       } else {
-        console.log('Paragraph not found');
+        console.log("Paragraph not found");
       }
     }
   });
 }
-
 
 addCheckboxListeners();
 
@@ -45,26 +44,27 @@ if (new Date().getDate() < 9) {
 }
 
 const date = day + "/" + month + "/" + year;
-document.querySelector('#footer').innerHTML += `<span id="date">${date}</span>`;
+document.querySelector("#footer").innerHTML += `<span id="date">${date}</span>`;
 
 /* SUPPRIMER DES MESSAGES */
-const pictoDelete = document.querySelectorAll('.delete');
+const pictoDelete = document.querySelectorAll(".delete");
 
-pictoDelete.forEach(elementX => elementX.addEventListener ('click', event => {
-  console.log('clic détecté sur supprimer');
-  event.currentTarget.parentElement.remove();
-  count();
-  console.log(count)
-  addCheckboxListeners();
-}));
-
+pictoDelete.forEach((elementX) =>
+  elementX.addEventListener("click", (event) => {
+    console.log("clic détecté sur supprimer");
+    event.currentTarget.parentElement.remove();
+    count();
+    console.log(count);
+    addCheckboxListeners();
+  })
+);
 
 /* AJOUTER UN NOUVEAU MESSAGE AVEC UN INPUT */
-const addClick = document.querySelector('#btn-add');
-const messageInput = document.querySelector('#add-step');
+const addClick = document.querySelector("#btn-add");
+const messageInput = document.querySelector("#add-step");
 
-addClick.addEventListener ('click', event => {
-  console.log('clic détecté sur ajouter');
+addClick.addEventListener("click", (event) => {
+  console.log("clic détecté sur ajouter");
   const newMessage = ` 
     <div class="row new-row">
       <img class="avatar" src="images/macon.png" />
@@ -75,45 +75,54 @@ addClick.addEventListener ('click', event => {
       <span class="delete">✖</span>
     </div>
   `;
-  document.querySelector('#msg-container').innerHTML += newMessage;
-  
-  const allDeleteButtons = document.querySelectorAll('.delete');
-  allDeleteButtons.forEach(button => {
-    button.addEventListener('click', event => {
-      console.log('clic détecté sur supprimer');
+  document.querySelector("#msg-container").innerHTML += newMessage;
+
+  const allDeleteButtons = document.querySelectorAll(".delete");
+  allDeleteButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      console.log("clic détecté sur supprimer");
       event.currentTarget.parentElement.remove();
       count();
       addCheckboxListeners();
-      console.log("check pris en compte?",addCheckboxListeners())
+      console.log("check pris en compte?", addCheckboxListeners());
     });
   });
   count();
   messageInput.value = "";
   addCheckboxListeners();
-  console.log("check pris en compte?",addCheckboxListeners())
+  console.log("check pris en compte?", addCheckboxListeners());
 });
 
-
-
 /* Sélectionner les étapes: Toutes, A faire et Faites */
-const buttons = document.querySelectorAll('.btn-outline-primary');
-const elements = document.querySelectorAll('.element');
+const buttons = document.querySelectorAll(".btn-outline-primary");
+console.log('Buttons:', buttons); 
+const rows = document.querySelectorAll(".row");
+console.log('Rows:', rows); 
 
-buttons.forEach(button => {
-  button.addEventListener('click', function() {
-    const filter = this.dataset.filter;
-    console.log("Filter value:", filter); 
+// Ajoutez un écouteur d'événements à chaque bouton
+buttons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    // Obtenez le filtre à partir de l'attribut data-filter du bouton
+    const filter = event.target.getAttribute("data-filter");
+    console.log('Filter:', filter);
 
-    buttons.forEach(btn => {
-      btn.classList.remove('active');
-    });
-    this.classList.add('active');
-
-    elements.forEach(element => {
-      if (filter === 'all' || element.dataset.filter === filter) {
-        element.style.display = 'block';
+    rows.forEach((row) => {
+      
+      if (filter === "all") {
+        row.style.display = "";
       } else {
-        element.style.display = 'none';
+        // Sinon, vérifiez si la checkbox de la ligne est cochée
+        const checkbox = row.querySelector('input[type="checkbox"]');
+        const isChecked = checkbox ? checkbox.checked : false;
+
+        if (
+          (filter === "todo" && !isChecked) ||
+          (filter === "done" && isChecked)
+        ) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
       }
     });
   });
