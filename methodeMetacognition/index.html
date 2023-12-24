@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="style.css" />
+ 
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Varela+Round&display=swap" rel="stylesheet">
+  <title>Méthode de métacognition</title>
+</head>
+
+<body>
+  <div id="container">
+    <div id="header">
+      <div id="logo-container">
+        <!-- image libre de droit provenant de : https://fr.freepik.com/-->
+        <img src="./images/creativity_12985395.png" alt="image de cerveau" id="creativity" class="icon"/>
+   
+        <h1 class="blue">Décomposition<span class="white"> d'exercices</span></h1>
+      </div>
+      <div class="btn-group mb-4" role="group">
+        <button type="button" class=" btn btn-outline-primary active" data-filter="all">Toutes</button>
+        <button type="button" class=" btn btn-outline-primary" data-filter="todo">A faire</button>
+        <button type="button" class=" btn btn-outline-primary" data-filter="done">Faites</button>
+      </div>
+    </div>
+
+    <div id="content-left">
+      <div id="add-section">
+        <textarea id="add-step" placeholder="Nouvelle étape..."></textarea>
+        <button type="button" id="btn-add" class="btn">Ajouter</button>
+      </div>
+    </div>
+
+    <div id="content-right">
+      <div id="total-msg">
+        <span>Nombre d'étapes : <span id="count">7</span></span>
+      </div>
+
+      <div id="msg-container">
+        <div class="row">
+          <img class="avatar" src="./images/loupe_751463.png" />
+          
+          <div class="text-container">
+            <h6>Détective</h6>
+            
+            <p><input class="check-input crossed-out" type="checkbox" id="todo-1"/>
+              Décourir la consigne avec un première lecture.
+            </p>
+          </div>
+          <span class="delete">✖</span>
+        </div>
+
+        <div class="row">
+          <img class="avatar" src="./images/loupe_751463.png" />
+          <div class="text-container">
+            <h6>Détective</h6>
+            <p><input class="check-input crossed-out" type="checkbox" id="todo-2"/>
+             Chercher des indices de compréhension avec une deuxième lecture.
+            </p>
+          </div>
+          <span class="delete">✖</span>
+        </div>
+
+        <div class="row">
+          <img class="avatar" src="./images/loupe_751463.png" />
+          <div class="text-container">
+            <h6>Détective</h6>
+            <p><input class="check-input crossed-out" type="checkbox" id="todo-3"/>
+              Entourer les mots importants avec la troisième lecture.
+            </p>
+          </div>
+          <span class="delete">✖</span>
+        </div>
+
+        <div class="row">
+          <img class="avatar" src="./images/open-book_2702134.png" />
+          <div class="text-container">
+            <h6>Bibliothècaire</h6>
+            <p><input class="check-input crossed-out" type="checkbox" id="todo-4"/>
+              Rechercher dans ses connaissances les informations utiles pour résoudre l'exercice.
+            </p>
+          </div>
+          <span class="delete">✖</span>
+        </div>
+
+        <div class="row">
+          <img class="avatar" src="./images/prof.png">
+          <div class="text-container">
+            <h6>Scientifique</h6>
+            <p><input class="check-input crossed-out" type="checkbox" id="todo-5"/>
+              Chercher plusieurs solutions aux problèmes.
+            </p>
+          </div>
+          <span class="delete">✖</span>
+        </div>
+        <div class="row">
+          <img class="avatar" src="./images/prof.png">
+          <div class="text-container">
+            <h6>Scientifique</h6>
+            <p><input class="check-input crossed-out" type="checkbox" id="todo-6"/>
+              Me mettre dans la peau du correcteur.
+            </p>
+          </div>
+          <span class="delete">✖</span>
+        </div>
+        <div class="row">
+          <!--image de https://www.flaticon.com/-->
+          <img class="avatar" src="./images/liste-de-controle.png">
+          <div class="text-container">
+            <h6>Stratège</h6>
+            <p><input class="check-input crossed-out" type="checkbox" id="todo-7"/>
+              Réaliser un plan avec un ordre à suivre.
+            </p>
+          </div>
+          <span class="delete">✖</span>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div id="footer">
+      <span>@copyright 2024 Rios marilyne</span>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
